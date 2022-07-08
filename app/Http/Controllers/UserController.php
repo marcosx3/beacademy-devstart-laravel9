@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+
 class UserController extends Controller
 {
     public function __construct(User $user)
@@ -49,17 +50,27 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->all();
-        if($request->password)
-        {
+        if ($request->password) {
             $data['password'] = bcrypt($request->password);
         }
-       DB::table('users')->where('id',$id)->update([
-        'name'=>$data['name'],
-        'email'=>$data['email'],
-        'password'=>$data['password']
-       ]);
-        
+        DB::table('users')->where('id', $id)->update([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => $data['password']
+        ]);
 
-       return redirect()->route('users.index');
+
+        return redirect()->route('users.index');
+    }
+
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        DB::table('users')
+            ->where('id', $id)
+            ->delete();
+
+        return redirect()->route('users.index');
     }
 }
