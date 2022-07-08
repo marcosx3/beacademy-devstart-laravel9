@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\DB;
 class UserController extends Controller
-{   
+{
     public function __construct(User $user)
     {
         $this->model = $user;
     }
+
     public function index()
     {
         $users = User::all();
@@ -21,7 +22,6 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-
         return view('users.show', compact('user'));
     }
 
@@ -30,12 +30,36 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request )
+    public function store(Request $request)
     {
-      $data = $request->all();
-      $data['password'] = bcrypt($request->password);
-      $this->model->create($data);
-      
-      return redirect()->route('users.index');
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
+        $this->model->create($data);
+
+        return redirect()->route('users.index');
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = $request->all();
+        if($request->password)
+        {
+            $data['password'] = bcrypt($request->password);
+        }
+       DB::table('users')->where('id',$id)->update([
+        'name'=>$data['name'],
+        'email'=>$data['email'],
+        'password'=>$data['password']
+       ]);
+        
+
+       return redirect()->route('users.index');
     }
 }
