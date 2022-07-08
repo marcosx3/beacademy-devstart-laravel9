@@ -19,8 +19,8 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ date('d/m/Y - H:i', strtotime($user->created_at)) }}</td>
-                <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-info  text-white m-1">Editar</a><a
-                        href="{{ route('users.show', $user->id) }}" class="btn btn-danger  text-white">Deletar</a>
+                <td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info  text-white m-1">Editar</a><a
+                        href="" class="btn btn-danger  text-white">Deletar</a>
                 </td>
             </tr>
         </tbody>
