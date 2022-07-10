@@ -4,6 +4,8 @@
 <div class="container">
     <h1>Listagem de Usuarios</h1>
     <a href="{{route('users.create')}}" class="btn btn-dark">Novo Usuário</a>
+
+  
     <table class="table">
         <thead>
             <tr>
