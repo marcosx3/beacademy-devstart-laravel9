@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreUpdateFormRequest;
 
 class UserController extends Controller
 {
@@ -31,12 +33,17 @@ class UserController extends Controller
         return view('users.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreUpdateFormRequest $request)
     {
         $data = $request->all();
         $data['password'] = bcrypt($request->password);
-        $this->model->create($data);
+      
 
+        $file = $request['image'];
+        $path = $file->store('profile','public');
+        $data['image'] = $path;
+        $this->model->create($data);
+        
         return redirect()->route('users.index');
     }
 
@@ -47,7 +54,7 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreUpdateFormRequest $request, $id)
     {
         $data = $request->all();
         if ($request->password) {
