@@ -31,6 +31,6 @@
             <input type="file" class="form-control form control-md" id="image" name="image">
         </div>
 
-        <button class="btn btn-dark text-white"type="submit">Atualizar</button>
+        <button class="btn btn-purpple text-white"type="submit">Atualizar</button>
     </form>
 @endsection
