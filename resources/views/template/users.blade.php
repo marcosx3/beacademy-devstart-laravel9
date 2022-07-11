@@ -12,6 +12,23 @@
 </head>
 
 <body>
+    <div class="container w-75 p3">
+        <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="/users">Usuarios</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link text-white" href="/posts">Posts</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+
 
     <div class="container">
         @yield('content')
