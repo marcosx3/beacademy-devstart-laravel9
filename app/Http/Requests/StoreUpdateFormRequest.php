@@ -29,7 +29,7 @@ class StoreUpdateFormRequest extends FormRequest
             'email' => [
                 'required',
                 'email',
-                'unique:user,email,{$id},id',
+                'unique:users,email,{$id},id',
             ],
             'image' => [
                 'file',
