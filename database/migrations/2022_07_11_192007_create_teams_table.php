@@ -16,28 +16,25 @@ return new class extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-
             $table->timestamps();
         });
-        Schema::create('team_user',function (Blueprint $table) {
+
+        Schema::create('team_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-            ->constrained('users')
-            ->onUpdate('CASCADE')
-            ->onDelete('CASCADE');
+                ->constrained('users')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
             $table->foreignId('team_id')
-            ->constrained('teams')
-            ->onUpdate('CASCADE')
-            ->onDelete('CASCADE');
+                ->constrained('teams')
+                ->onUpdate('CASCADE')
+                ->onDelete('CASCADE');
         });
+    }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    public  function down()
     {
         Schema::dropIfExists('teams');
+        Schema::dropIfExists('team_user');
     }
 };
