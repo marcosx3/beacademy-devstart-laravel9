@@ -3,8 +3,23 @@
 @section('content')
     <div class="container">
         <h1>Listagem de Usuarios</h1>
-        <a href="{{ route('users.create') }}" class="btn btn-outline-dark">Novo Usuário</a>
 
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm mt-2 mb-5">
+                    <a href="{{ route('users.create') }}" class="btn btn-outline-dark">Novo Usuário</a>
+                </div>
+                <div class="col-sm mt-3 mb-5">
+                    <form action="{{route('users.index')}}" method="GET">
+                        <div class="input-group">
+                            <input type="search" class="form-control roudend" placeholder="Search" name="search">
+                            <button type="submit" class="btn  btn-outline-primary">Pesquisar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
         <table class="table">
             <thead>
@@ -33,10 +48,11 @@
                         <th scope="row">{{ $user->id }}</th>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
-                        <td>  
-                            <td><a href="{{ route('posts.show', $user->id) }}" class="btn btn-outline-dark">Postagens {{$user->posts->count()}}</a> 
+                        <td>
+                        <td><a href="{{ route('posts.show', $user->id) }}" class="btn btn-outline-dark">Postagens
+                                {{ $user->posts->count() }}</a>
                         </td>
-                   
+
                         <td>{{ date('d/m/Y - H:i', strtotime($user->created_at)) }}</td>
                         <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-info  text-white">VISUALIZAR</a>
                         </td>
