@@ -32,4 +32,9 @@ class PostController extends Controller
         $posts = $user->posts()->get();
         return view('posts.show',compact('user','posts'));
     }
+
+    public function admin()
+    {
+        return view('admin.index');
+    }
 }
